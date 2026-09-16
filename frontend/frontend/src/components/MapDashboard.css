@@ -1,0 +1,38 @@
+.map-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: #121212;
+}
+
+.sidebar {
+    width: 350px;
+    background-color: #1e1e1e;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    z-index: 1; /* Keeps shadow over the map */
+}
+
+.map-container {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.route-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.route-btn:hover {
+    background-color: #2563eb;
+}

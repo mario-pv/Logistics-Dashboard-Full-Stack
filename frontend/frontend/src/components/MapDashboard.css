@@ -1,38 +1,320 @@
-.map-wrapper {
+/* Main Layout */
+.app-container {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
     background-color: #121212;
+    color: #ffffff;
 }
 
-.sidebar {
-    width: 350px;
+/* Top Header */
+.top-header {
+    height: 60px;
     background-color: #1e1e1e;
-    color: white;
-    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 30px;
+}
+
+.header-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3b82f6;
+    margin-right: 20px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 0;
+    transition: color 0.2s;
+}
+
+.nav-item.active {
+    color: #ffffff;
+    border-bottom: 2px solid #3b82f6;
+}
+
+/* Workspace (Sidebar + Map) */
+.workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar & Tabs */
+.sidebar {
+    width: 400px;
+    background-color: #1a1a1a;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-    z-index: 1; /* Keeps shadow over the map */
+    border-right: 1px solid #333;
+    z-index: 1;
 }
 
+.sidebar-tabs {
+    display: flex;
+    background-color: #222;
+    border-bottom: 1px solid #333;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #888;
+    padding: 12px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.tab-btn.active {
+    color: #3b82f6;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #3b82f6;
+}
+
+/* Content Area inside Sidebar */
+.sidebar-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.list-card {
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+}
+
+.list-card h4 {
+    margin: 0 0 10px 0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background-color: #374151;
+    color: #9ca3af;
+}
+
+.status-badge.pending { background-color: #566777; color: #f3fb02; }
+.status-badge.active { background-color: #064e3b; color: #6ee7b7; }
+
+.list-card p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.action-btn {
+    width: 100%;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.action-btn:hover { background-color: #2563eb; }
+
+/* Map */
 .map-container {
     flex-grow: 1;
     height: 100%;
 }
+/* Action Button Groups */
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
 
-.route-btn {
-    background-color: #3b82f6;
+.btn-small {
+    flex: 1;
+    background-color: #374151;
     color: white;
     border: none;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 8px 4px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.2s;
 }
 
-.route-btn:hover {
-    background-color: #2563eb;
+.btn-small:hover:not(:disabled) { background-color: #4b5563; }
+.btn-small.primary { background-color: #3b82f6; }
+.btn-small.primary:hover:not(:disabled) { background-color: #2563eb; }
+.btn-small.success { background-color: #10b981; }
+.btn-small.success:hover:not(:disabled) { background-color: #059669; }
+.btn-small:disabled {
+    background-color: #222;
+    color: #555;
+    cursor: not-allowed;
+}
+
+/* Order Selection List */
+.selection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.selectable-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #2a2a2a;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.selectable-card:hover { border-color: #555; }
+.selectable-card input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.generate-btn {
+    width: 100%;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.generate-btn:disabled { background-color: #064e3b; color: #aaa; cursor: not-allowed; }
+
+/* Sticky Action Bar for Route Creation */
+.sticky-action-bar {
+    position: sticky;
+    top: -20px; /* Snaps to the top of the padding */
+    background-color: #1a1a1a;
+    padding: 20px 0 15px 0;
+    border-bottom: 1px solid #333;
+    margin-bottom: 15px;
+    z-index: 10;
+}
+
+/* Compact Card for Orders */
+.compact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+/* Dropdown Menu styling */
+.dropdown-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    width: 140px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+}
+
+.dropdown-item {
+    background: none;
+    border: none;
+    color: #eee;
+    padding: 10px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #333;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background-color: #3b82f6; color: white; }
+.dropdown-item.danger:hover { background-color: #ef4444; }
+
+/* Update Pending to Created */
+.status-badge.created { background-color: #566777; color: #f3fb02; }
+
+/* Yellow Simulate Button */
+.btn-small.simulate {
+    background-color: #566777; color: #f3fb02;
+    font-weight: bold;
+}
+.btn-small.simulate:hover:not(:disabled) { background-color: #064E3BFF; }
+
+/* Home Tab Statistics Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat-card h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: #3b82f6;
+}
+
+.stat-card p {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* Clickable active routes on Home */
+.clickable-card {
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.clickable-card:hover {
+    border-color: #555;
+}
+.clickable-card.selected {
+    border-color: #3b82f6;
+    background-color: #1e293b; /* subtle blue tint */
 }

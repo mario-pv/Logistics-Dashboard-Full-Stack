@@ -1,8 +1,11 @@
 {
   "dependencies": {
-    "mapbox-gl": "^3.30.0"
+    "@stomp/stompjs": "^7.3.0",
+    "mapbox-gl": "^3.30.0",
+    "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
-    "@types/mapbox-gl": "^3.4.1"
+    "@types/mapbox-gl": "^3.4.1",
+    "@types/sockjs-client": "^1.5.4"
   }
 }

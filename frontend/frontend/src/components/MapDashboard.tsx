@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapDashboard.css';
 import webSocketService, { type DriverLocation } from '../services/WebSocketService';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWFyaW9wdiIsImEiOiJjbXU0MWg5dG0wZmZsMndwdDk0c3dyc3A3In0.aqYmd3djdBQYoZfeeTKFsQ';
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 const STATIC_ORDERS = [
     { id: 'ORD-01', address: '5201 Woodward Ave', zip: '48202', lng: -83.0665, lat: 42.3581 },

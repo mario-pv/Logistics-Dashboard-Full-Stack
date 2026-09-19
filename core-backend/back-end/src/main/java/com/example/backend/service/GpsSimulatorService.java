@@ -8,29 +8,44 @@ import org.springframework.stereotype.Service;
 public class GpsSimulatorService {
 
     private final SimpMessagingTemplate messagingTemplate;
+    private boolean isSimulating = false;
 
-    // Starting in downtown Detroit
-    private double currentLat = 42.3314;
-    private double currentLng = -83.0458;
+    private int currentStep = 0;
+    private double[][] routePath;
+
+    private String currentDriverId;
+    private String currentRouteId;
 
     public GpsSimulatorService(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
-    // Timer every 2,000 milliseconds (2 seconds)
-    @Scheduled(fixedRate = 2000)
+    public void startSimulation(String driverId, String routeId, double[][] coordinates) {
+        this.currentDriverId = driverId;
+        this.currentRouteId = routeId;
+        this.routePath = coordinates;
+        this.currentStep = 0;
+        this.isSimulating = true;
+        System.out.println("Simulation started for " + driverId + " on route " + routeId);
+    }
+
+    @Scheduled(fixedRate = 250)
     public void simulateDriverMovement() {
-        // Nudge the coordinates slightly to simulate driving
-        currentLat += 0.0002;
-        currentLng += 0.0002;
+        if (!isSimulating || routePath == null) return;
 
-        // Build a JSON string that matches React TypeScript interface
-        String payload = String.format("{\"driverId\":\"driver-1\", \"lat\":%f, \"lng\":%f}", currentLat, currentLng);
+        if (currentStep >= routePath.length) {
+            isSimulating = false;
+            String completedPayload = String.format("{\"driverId\":\"%s\", \"routeId\":\"%s\", \"status\":\"COMPLETED\"}", currentDriverId, currentRouteId);
+            messagingTemplate.convertAndSend("/topic/driver-locations", completedPayload);
+            return;
+        }
 
-        // Broadcast it to the channel React is listening to
+        double currentLng = routePath[currentStep][0];
+        double currentLat = routePath[currentStep][1];
+
+        String payload = String.format("{\"driverId\":\"%s\", \"lat\":%f, \"lng\":%f}", currentDriverId, currentLat, currentLng);
         messagingTemplate.convertAndSend("/topic/driver-locations", payload);
 
-        // Print to console
-        System.out.println("Dispatching live coordinate: " + payload);
+        currentStep += 1;
     }
 }

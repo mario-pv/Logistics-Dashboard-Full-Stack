@@ -20,7 +20,7 @@
 }
 
 .header-brand {
-    font-size: 1.2rem;
+    font-size: 2rem !important;
     font-weight: bold;
     color: #3b82f6;
     margin-right: 20px;
@@ -35,7 +35,7 @@
     background: none;
     border: none;
     color: #888;
-    font-size: 1rem;
+    font-size: 1.25rem !important;
     cursor: pointer;
     padding: 5px 0;
     transition: color 0.2s;
@@ -76,7 +76,9 @@
     color: #888;
     padding: 12px 0;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
 }
 
 .tab-btn.active {
@@ -154,8 +156,8 @@
     background-color: #374151;
     color: white;
     border: none;
-    padding: 8px 4px;
-    border-radius: 4px;
+    padding: 4px 2px;
+    border-radius: 2px;
     font-size: 0.75rem;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -273,16 +275,17 @@
 
 /* Yellow Simulate Button */
 .btn-small.simulate {
-    background-color: #566777; color: #f3fb02;
+    background-color: #566777; color: #fafaf8;
     font-weight: bold;
 }
 .btn-small.simulate:hover:not(:disabled) { background-color: #064E3BFF; }
 
 /* Home Tab Statistics Grid */
+/* Home Tab Statistics Grid - Compact 4 columns */
 .stats-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     margin-bottom: 20px;
 }
 
@@ -290,19 +293,20 @@
     background-color: #2a2a2a;
     border: 1px solid #333;
     border-radius: 6px;
-    padding: 15px;
+    padding: 10px 5px; /* Tighter padding */
     text-align: center;
 }
 
 .stat-card h2 {
     margin: 0;
-    font-size: 2rem;
-    color: #3b82f6;
+    font-size: 1.5rem !important;
+    color: #e6e9ed;
 }
 
 .stat-card p {
     margin: 5px 0 0 0;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
+    font-weight: bold;
     color: #aaa;
 }
 
@@ -317,4 +321,7 @@
 .clickable-card.selected {
     border-color: #3b82f6;
     background-color: #1e293b; /* subtle blue tint */
+}
+.sidebar-content h3 {
+    font-size: 1.75rem !important;
 }
